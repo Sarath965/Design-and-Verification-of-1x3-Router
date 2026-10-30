@@ -4,12 +4,6 @@ A UVM 1.2 testbench that verifies a 1×3 packet router written in SystemVerilog.
 It has a source agent, three destination (reader) agents, a reference model, a scoreboard,
 a functional coverage model and protocol assertions, plus 8 tests.
 
-> \*\*Status:\*\* `smoke\_test` has been run on \*\*Synopsys VCS X-2025.06-SP1 (EDA Playground)\*\* and
-> passes: 3/3 packets matched, 0 mismatches, 0 UVM errors. See \[Regression status](#regression-status)
-> for the other tests.
-
-\---
-
 ## Table of contents
 
 1. [Design overview](#design-overview)
