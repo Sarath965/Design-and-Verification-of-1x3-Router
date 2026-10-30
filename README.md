@@ -16,7 +16,6 @@ a functional coverage model and protocol assertions, plus 8 tests.
 8. [Functional coverage](#functional-coverage)
 9. [RTL bugs found and fixed](#rtl-bugs-found-and-fixed)
 10. [Design decisions in the testbench](#design-decisions-in-the-testbench)
-\---
 
 ## Design overview
 
