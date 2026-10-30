@@ -24,22 +24,22 @@ output ports, each buffered by a 16×9 FIFO.
 
 |Module|Role|
 |-|-|
-|`router\_top`|Connects everything|
-|`router\_fsm`|8-state controller (decode address, load data, FIFO-full handling, parity check)|
-|`router\_register`|Holds header and full-state bytes, computes running parity, drives `dout` and `error`|
-|`router\_fifo`|16-deep FIFO per port; 9th bit tags the header; length counter|
-|`router\_synchronizer`|Latches the address, selects `write\_enb` and `fifo\_full`, drives `vld\_out`, and raises a **soft reset** when a FIFO's data sits unread for 30 cycles|
+|`router_top`|Connects everything|
+|`router_fsm`|8-state controller (decode address, load data, FIFO-full handling, parity check)|
+|`router_register`|Holds header and full-state bytes, computes running parity, drives `dout` and `error`|
+|`router_fifo`|16-deep FIFO per port; 9th bit tags the header; length counter|
+|`router_synchronizer`|Latches the address, selects `write\_enb` and `fifo\_full`, drives `vld\_out`, and raises a **soft reset** when a FIFO's data sits unread for 30 cycles|
 
 ### Interface
 
 |Signal|Dir|Description|
 |-|-|-|
 |`clock`, `resetn`|in|Clock, active-low synchronous reset|
-|`pkt\_valid`|in|High from the header through the last payload byte; **low on the parity byte**|
-|`data\_in\[7:0]`|in|Packet bytes|
-|`read\_enb\_0/1/2`|in|Reader asks for a byte from port *x*|
-|`data\_out\_0/1/2\[7:0]`|out|Output bytes|
-|`vld\_out\_0/1/2`|out|Port *x* FIFO is not empty|
+|`pkt_valid`|in|High from the header through the last payload byte; **low on the parity byte**|
+|`data_in[7:0]`|in|Packet bytes|
+|`read_enb_0/1/2`|in|Reader asks for a byte from port *x*|
+|`data_out_0/1/2[7:0]`|out|Output bytes|
+|`vld_out_0/1/2`|out|Port *x* FIFO is not empty|
 |`busy`|out|Router cannot take a new byte; the source must hold its current byte|
 |`error`|out|Packet parity mismatch|
 
@@ -49,7 +49,7 @@ output ports, each buffered by a 16×9 FIFO.
 
 |Byte|Content|
 |-|-|
-|Header|`\[7:2]` payload length (1 to 63), `\[1:0]` destination port (0, 1, 2; **3 is invalid and ignored**)|
+|Header|`[7:2]` payload length (1 to 63), `[1:0]` destination port (0, 1, 2; **3 is invalid and ignored**)|
 |Payload|`length` bytes|
 |Parity|Bitwise XOR of the header and all payload bytes|
 
@@ -61,7 +61,7 @@ only if `busy` was low; otherwise it keeps holding the byte (the spec requires t
 gone high and low again. When the FIFO is full the DUT latches the parity several cycles later.
 
 **Reader side.** A read happens at an edge where `read\_enb \&\& vld\_out`. The byte appears on
-`data\_out` one clock later.
+`data_out` one clock later.
 
 \---
 
